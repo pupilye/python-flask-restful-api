@@ -14,12 +14,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # turn off the Flask one, n
 app.secret_key = 'jose'
 api = Api(app)
 
-# use thing only from Flask
-@app.before_first_request
-def create_tables():
-    # it only creates all the tables it sees. If no resource is using, you can import model instead
-    db.create_all()
-
 jwt = JWT(app, authenticate, identity) # /auth
 
 api.add_resource(Store, '/store/<string:name>')
